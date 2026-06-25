@@ -1,3 +1,5 @@
+/// <reference types="cypress"/>
+
 describe('Funcionalidade: Contato', () => {
 
   beforeEach(() => {
@@ -10,6 +12,8 @@ describe('Funcionalidade: Contato', () => {
     cy.get('[name="subject"]').select('Parcerias')
     cy.get('[name="message"]').type('Mensagem de teste')
     cy.get('#btn-submit').click();
+
+    //Resultado esperado
     cy.contains('Contato enviado com sucesso!').should('exist')
   })
 
@@ -18,6 +22,8 @@ describe('Funcionalidade: Contato', () => {
     cy.get('[name="subject"]').select('Parcerias')
     cy.get('[name="message"]').type('Mensagem de teste')
     cy.get('#btn-submit').click();
+
+    //Resultado esperado
     cy.get('#alert-container').should('contain', 'Por favor, preencha o campo Nome.')
   });
 
@@ -26,15 +32,18 @@ describe('Funcionalidade: Contato', () => {
     cy.get('[name="subject"]').select('Parcerias')
     cy.get('[name="message"]').type('Mensagem de teste')
     cy.get('#btn-submit').click();
+
+    //Resultado esperado
     cy.get('#alert-container').should('contain', 'Por favor, preencha o campo E-mail.')
   });
 
   it('Deve validar mensagem de erro ao enviar sem preecher o assunto', () => {
     cy.get('[name="name"]').type('Patrick Venturini');
     cy.get('[name="email"]').type('patrick@teste.com')
-
     cy.get('[name="message"]').type('Mensagem de teste')
     cy.get('#btn-submit').click();
+
+    //Resultado esperado
     cy.get('#alert-container').should('contain', 'Por favor, selecione o Assunto.')
   });
 
@@ -42,8 +51,9 @@ describe('Funcionalidade: Contato', () => {
     cy.get('[name="name"]').type('Patrick Venturini');
     cy.get('[name="email"]').type('patrick@teste.com')
     cy.get('[name="subject"]').select('Parcerias')
-
     cy.get('#btn-submit').click();
+
+    //Resultado esperado
     cy.get('#alert-container').should('contain', 'Por favor, escreva sua Mensagem.')
   });
 });
